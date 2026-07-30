@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# North & Oak
+
+A premium Scandinavian furniture brand portfolio website. Designed to demonstrate a full e-commerce front-end — collections, product detail pages, editorial journal, trade programme, and contact — built with modern web tooling.
+
+**Live site →** [north-and-oak-delta.vercel.app](https://north-and-oak-delta.vercel.app)
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS v4 |
+| Animation | Framer Motion v12 |
+| Forms | React Hook Form + Zod |
+| Images | Unsplash CDN via next/image |
+| Deployment | Vercel |
+
+---
+
+## Features
+
+- **31 statically generated pages** — all routes pre-rendered at build time
+- **6 collections** — living room, dining, bedroom, lounge, outdoor, lighting
+- **7 products** with image galleries, variant selectors, specifications, and related products
+- **6 journal articles** with JSON-LD structured data and OpenGraph metadata
+- **Animated hero sections** with reduced-motion support
+- **Accessible navigation** — keyboard focus trap in mobile menu, dropdown keyboard support
+- **SEO** — sitemap.xml, robots.txt, breadcrumb schema, article schema
+- **Fully responsive** — mobile-first layout throughout
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Production build
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Requires **Node.js 20+**.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/                    # Next.js App Router pages
+  collections/          # Collections list + [slug] detail + [product] detail
+  journal/              # Journal index + [slug] article
+  about/
+  contact/
+  trade/
+  faq/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+components/
+  layout/               # Header, Footer, Breadcrumb, MobileMenu
+  sections/             # Hero, FeaturedCollections, SustainabilityStats, etc.
+  collections/          # ProductCard, ProductDetail, CollectionHero, etc.
+  journal/              # ArticleCard, ArticleHero, RelatedArticles, etc.
+  forms/                # ContactForm, TradeApplicationForm, NewsletterForm
+  shared/               # AnimatedSection, SectionHeading, Button, etc.
 
-## Deploy on Vercel
+data/                   # Static data — collections, products, articles
+types/                  # TypeScript interfaces
+lib/                    # Zod schemas, utilities
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design System
+
+Tokens are defined in `app/globals.css` under `:root` and mapped into Tailwind v4 via `@theme inline`. Key brand colours:
+
+| Token | Value | Use |
+|---|---|---|
+| `--birch` | `#F5F0E8` | Background |
+| `--oak` | `#8C6D4F` | Primary accent |
+| `--char` | `#1C1A17` | Body text |
+| `--warmstone` | `#C8B99A` | Borders, labels |
+
+Typography uses **Cormorant Garamond** (headings), **DM Sans** (body), and **DM Mono** (labels/captions).
+
+---
+
+## Deployment
+
+The repository is connected to Vercel. Every push to `master` triggers an automatic production deployment.
+
+To deploy manually:
+
+```bash
+npx vercel --prod
+```
